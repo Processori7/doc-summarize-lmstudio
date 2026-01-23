@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "minAppVersion": "1.0.0",
   "description": "Суммаризация документов, изображений и заметок с помощью LM Studio API. Быстрые ответы на вопросы о заметках.",
-  "author": "Your Name",
-  "authorUrl": "https://github.com/yourusername",
+  "author": "Processori7",
+  "authorUrl": "https://github.com/Processori7",
   "isDesktopOnly": false
 }
