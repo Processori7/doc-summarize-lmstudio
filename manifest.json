@@ -1,8 +1,8 @@
 {
   "id": "doc-summarize-lmstudio",
   "name": "Doc Summarize with LM Studio",
-  "version": "1.0.0",
-  "minAppVersion": "1.0.0",
+  "version": "1.0.1",
+  "minAppVersion": "1.0.1",
   "description": "Суммаризация документов, изображений и заметок с помощью LM Studio API. Быстрые ответы на вопросы о заметках.",
   "author": "Processori7",
   "authorUrl": "https://github.com/Processori7",
