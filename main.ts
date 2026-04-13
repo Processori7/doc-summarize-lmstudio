@@ -180,6 +180,26 @@ export default class DocSummarizePlugin extends Plugin {
       },
     });
 
+    // Пункт в контекстном меню проводника (правый клик по пространству/папкам)
+    this.registerEvent(
+      this.app.workspace.on("files-menu", (menu: Menu, files: TAbstractFile[]) => {
+        const isSpaceOrFolderContext =
+          files.length === 0 || files.every((file) => file instanceof TFolder);
+
+        if (isSpaceOrFolderContext) {
+          this.addOpenChatMenuItem(menu);
+        }
+      })
+    );
+
+    this.registerEvent(
+      this.app.workspace.on("file-menu", (menu: Menu, file: TAbstractFile) => {
+        if (file instanceof TFolder) {
+          this.addOpenChatMenuItem(menu);
+        }
+      })
+    );
+
     // Добавляем вкладку настроек
     this.addSettingTab(new DocSummarizeSettingTab(this.app, this));
 
@@ -194,6 +214,24 @@ export default class DocSummarizePlugin extends Plugin {
 
   onunload() {
     this.app.workspace.detachLeavesOfType(VIEW_TYPE_CHAT);
+  }
+
+  addOpenChatMenuItem(menu: Menu) {
+    const menuWithState = menu as Menu & { docSummarizeOpenItemAdded?: boolean };
+    if (menuWithState.docSummarizeOpenItemAdded) {
+      return;
+    }
+    menuWithState.docSummarizeOpenItemAdded = true;
+
+    menu.addSeparator();
+    menu.addItem((item) => {
+      item
+        .setTitle("Открыть LM Sumirizer")
+        .setIcon("message-square")
+        .onClick(() => {
+          this.activateChatView();
+        });
+    });
   }
 
   // Активация боковой панели чата
